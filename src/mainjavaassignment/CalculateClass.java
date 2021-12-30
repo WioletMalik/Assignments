@@ -9,16 +9,21 @@ public class CalculateClass {
 	double tip;
 	double tax;
 	double completeCost;
+	String theCoupon;
+	double discount;
+	double costAfterDiscount;
+	double cashPayment;
+	double cardPayment;
 
-	public CalculateClass() {
-
-	}
-
-	public CalculateClass(double foodCost, double distance) {
+	public CalculateClass(double foodCost, double distance, String theCoupon, double cashPayment, double cardPayment) {
 		this.foodCost = foodCost;
 		this.distance = distance;
+		this.theCoupon = theCoupon;
+		
 
 	}
+
+	Coupon coupon_1 = new Coupon();
 
 	public void deliveryCost() {
 		if (foodCost > 100 && distance <= 20) {
@@ -46,22 +51,31 @@ public class CalculateClass {
 		return baseCost;
 	}
 
-	public void tip() {
+	public double tip() {
 		if (foodCost > 40) {
 			tip = foodCost * 0.02;
 			System.out.println("Tip amount:" + tip);
+
 		}
+		return tip;
 	}
 
-	public void taxCalculation(double costAfterDiscount) {
+	public double taxCalculation(double costAfterDiscount) {
+
 		tax = costAfterDiscount * 0.13;
+
 		System.out.println("Tax on Food:" + tax);
+		return tax;
+	}
+
+	public double calculateDiscountedCost() {
+		costAfterDiscount = coupon_1.costAfterDiscount(baseCost, theCoupon);
+		return costAfterDiscount;
 	}
 
 	public double completeCost(double costAfterDiscount) {
-		taxCalculation(costAfterDiscount);
-		tip();
-		completeCost = costAfterDiscount + tax + tip;
+		completeCost = costAfterDiscount + taxCalculation(costAfterDiscount) + tip();
 		return completeCost;
 	}
+
 }

@@ -5,17 +5,12 @@ public class Coupon {
 	double foodCost;
 	double deliveryCost;
 	double costAfterDiscount;
-	String Coupon;
+	
 	double baseCost;
 
-	public Coupon() {
-	}
+	
 
-	public Coupon(String coupon) {
-		this.Coupon = coupon;
-	}
-
-	public double costAfterDiscount(double baseCost) {
+	public double costAfterDiscount(double baseCost, String Coupon) {
 
 		if (Coupon.equalsIgnoreCase("Coupon5")) {
 			costAfterDiscount = (baseCost - (baseCost * 0.05));
